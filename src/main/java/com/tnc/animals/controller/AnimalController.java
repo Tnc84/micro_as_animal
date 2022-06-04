@@ -24,7 +24,7 @@ public class AnimalController {
     private final AnimalDTOMapper animalDTOMapper;
 
     @GetMapping
-    @RequestMapping("/{id}")
+    @RequestMapping("/getById/{id}")
     public ResponseEntity<AnimalDTO> get(@PathVariable Long id) {
         return ResponseEntity.ok(animalDTOMapper.toDTO(animalService.get(id)));
     }

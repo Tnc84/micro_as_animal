@@ -1,11 +1,19 @@
 server:
   port : 8093
 spring:
+  cloud:
+    gcp:
+      sql:
+        database-name: animals-db
+        instance-connection-name: animal-shelter-351809:us-central1:animal-db
   datasource:
-    driverClassName: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/animals
-    username: root
-    password: root
+#    driverClassName: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://localhost:3306/animals
+#    username: root
+#    password: root
+    initialization-mode: always
+  profile:
+    active: mysql
   jpa:
     hibernate:
       ddl-auto: update
