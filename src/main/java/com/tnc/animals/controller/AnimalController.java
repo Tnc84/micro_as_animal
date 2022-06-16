@@ -29,7 +29,7 @@ public class AnimalController {
         return ResponseEntity.ok(animalDTOMapper.toDTO(animalService.get(id)));
     }
 
-    @GetMapping
+    @GetMapping("/getAll")
     public ResponseEntity<List<AnimalDTO>> getAll() {
         return ResponseEntity.ok(animalDTOMapper.toDTOList(animalService.getAll()));
     }
