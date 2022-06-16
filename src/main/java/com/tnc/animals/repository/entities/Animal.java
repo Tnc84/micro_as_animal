@@ -36,4 +36,6 @@ public class Animal {
     private String species;
 
     private String photo;
+
+    private String environment;
 }

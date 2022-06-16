@@ -5,6 +5,7 @@ import com.tnc.animals.service.domain.AnimalDomain;
 import com.tnc.animals.service.interfaces.AnimalService;
 import com.tnc.animals.service.mapper.AnimalDomainMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,6 +16,7 @@ public class AnimalServiceImpl implements AnimalService {
 
     private final AnimalRepository animalRepository;
     private final AnimalDomainMapper animalDomainMapper;
+    private final Environment environment;
 
     @Override
     public AnimalDomain get(Long id) {
@@ -23,7 +25,13 @@ public class AnimalServiceImpl implements AnimalService {
 
     @Override
     public List<AnimalDomain> getAll() {
-        return animalDomainMapper.toDomainList(animalRepository.findAll());
+        String port = environment.getProperty("local.server.port");
+        var getAnimals = animalDomainMapper.toDomainList(animalRepository.findAll());
+        for (AnimalDomain animals : getAnimals
+             ) {
+            animals.setEnvironment(port);
+        }
+        return getAnimals;
     }
 
     @Override
@@ -34,5 +42,11 @@ public class AnimalServiceImpl implements AnimalService {
     @Override
     public AnimalDomain update(AnimalDomain animalDomain) {
         return animalDomainMapper.toDomain(animalRepository.save(animalDomainMapper.toEntity(animalDomain)));
+    }
+
+    private AnimalDomain setEnvironment(AnimalDomain animalDomain) {
+        String port = environment.getProperty("local.server.port");
+        animalDomain.setEnvironment(port);
+        return animalDomain;
     }
 }

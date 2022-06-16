@@ -4,9 +4,10 @@ import lombok.Data;
 
 @Data
 public class AnimalDomain {
-    Long id;
-    String name;
-    String breed;
-    String species;
-    String photo;
+    private Long id;
+    private String name;
+    private String breed;
+    private String species;
+    private String photo;
+    private String environment;
 }
