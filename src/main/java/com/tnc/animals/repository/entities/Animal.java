@@ -37,5 +37,4 @@ public class Animal {
 
     private String photo;
 
-    private String environment;
 }
